@@ -58,12 +58,8 @@ public class EmployeesController {
     @PostMapping("guardar")
     public String saveEmployee(Employee Employee, RedirectAttributes attr){
         attr.addFlashAttribute("msg", "Usuario actualizado exitosamente");
-        System.out.println(Employee.getId());
-        System.out.println(Employee.getFirstName());
-        System.out.println(Employee.getEmail());
         employeeRepository.actualizarEmp(Employee.getFirstName(), Employee.getLastName(),
                 Employee.getEmail(), Employee.getHiredate(), Employee.getJobid(), Employee.getSalary(), Employee.getDepartmentid(), Employee.getId());
-
         return "redirect:/empleado/lista";
     }
 

@@ -41,26 +41,40 @@
                     <input  type="text" class="form-control" id="email" name="email" th:value="${Employee.email}">
                 </div>
                 <div class="form-group">
-                    <label for="email">Fecha</label>
-                    <input type="text" class="form-control" id="hireDate" name="hireDate" th:value="${Employee.hiredate}">
+                    <label for="hireDate">Fecha</label>
+                    <input type="text" class="form-control" id="hireDate" name="hireDate" th:field="${Employee.hiredate}">
                 </div>
                 <div class="form-group">
-                    <label for="departmentId">Departamento</label>
-                    <select class="form-control" name="departmentId" id="departmentId">
-                        <option selected th:each="departments : ${Department}" th:text="${departments.getDepartmentName()}" th:if="${Employee.getDepartmentid() eq departments.getId()}"></option>
-                        <option th:each="departments : ${Department}" th:text="${departments.getDepartmentName()}" th:if="${Employee.getDepartmentid() ne departments.getId()}"></option>
+                    <label for="Departmentid">Departamento</label>
+                    <select class="form-control" name="Departmentid" id="DepartmentId">
+                        <option selected th:each="departments : ${Department}"
+                                th:text="${departments.getDepartmentName()}"
+                                th:value="${departments.getId()}"
+                                th:if="${Employee.getDepartmentid() eq departments.getId()}"></option>
+
+                        <option th:each="departments : ${Department}"
+                                th:text="${departments.getDepartmentName()}"
+                                th:value="${departments.getId()}"
+                                th:if="${Employee.getDepartmentid() ne departments.getId()}"></option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="jobId">Trabajo</label>
-                    <select class="form-control" name="jobId" id="jobId">
-                        <option selected th:each="jobs : ${Job}" th:text="${jobs.getJobTitle()}" th:if="${Employee.getJobid() eq jobs.getId()}"></option>
-                        <option th:each="jobs : ${Job}" th:text="${jobs.getJobTitle()}" th:if="${Employee.getJobid() ne jobs.getId()}"></option>
+                    <label for="Jobid">Trabajo</label>
+                    <select class="form-control" name="Jobid" id="Jobid">
+                        <option selected th:each="jobs : ${Job}"
+                                th:text="${jobs.getJobTitle()}"
+                                th:value="${jobs.getId()}"
+                                th:if="${Employee.getJobid() eq jobs.getId()}"></option>
+
+                        <option th:each="jobs : ${Job}"
+                                th:text="${jobs.getJobTitle()}"
+                                th:value="${jobs.getId()}"
+                                th:if="${Employee.getJobid() ne jobs.getId()}"></option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="salary">Salario</label>
-                    <input type="text" class="form-control disabled" id="salary" th:value="${Employee.salary}">
+                    <input type="text" class="form-control disabled" id="salary" th:field="${Employee.salary}">
                 </div>
 
                 <div class="form-group" style="margin-top: 10px">
