@@ -1,15 +1,17 @@
 package com.example.lab5grupal.controller;
 
+import com.example.lab5grupal.entity.Employee;
 import com.example.lab5grupal.repository.DepartmentRepository;
 import com.example.lab5grupal.repository.EmployeeRepository;
 import com.example.lab5grupal.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.swing.text.html.Option;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/empleado")
@@ -44,11 +46,25 @@ public class EmployeesController {
     }
 
     @GetMapping("/info/{id}")
-    public String Infoempleado(Model model, @PathVariable("id") Integer id){
-        model.addAttribute("Employee",employeeRepository.findById(id));
+    public String informEmployee(Model model, @PathVariable("id") Integer id){
+        Optional<Employee> optem= employeeRepository.findById(id);
+        Employee emp = optem.get();
+        model.addAttribute("Employee",emp);
         model.addAttribute("Department",departmentRepository.obtenerdepartment());
         model.addAttribute("Job",jobRepository.obtenerjobs());
         return "employee/information";
+    }
+
+    @PostMapping("guardar")
+    public String saveEmployee(Employee Employee, RedirectAttributes attr){
+        attr.addFlashAttribute("msg", "Usuario actualizado exitosamente");
+        System.out.println(Employee.getId());
+        System.out.println(Employee.getFirstName());
+        System.out.println(Employee.getEmail());
+        employeeRepository.actualizarEmp(Employee.getFirstName(), Employee.getLastName(),
+                Employee.getEmail(), Employee.getHiredate(), Employee.getJobid(), Employee.getSalary(), Employee.getDepartmentid(), Employee.getId());
+
+        return "redirect:/empleado/lista";
     }
 
 }

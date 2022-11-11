@@ -24,7 +24,7 @@ public class Employee {
     private String password;
     @Column(name = "phoneNumber")
     private String phonenumber;
-    @Column(name = "hireDate")
+    @Column(name = "hire_date")
     private String hiredate;
     @Column(name = "job_id")
     private String jobid;
