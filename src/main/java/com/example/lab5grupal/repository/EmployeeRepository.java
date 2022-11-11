@@ -13,4 +13,6 @@ public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
 
     @Query(nativeQuery = true, value = "select * from employees order by first_name desc")
     List<Employee> obtenerListaDescendente();
+
+
 }

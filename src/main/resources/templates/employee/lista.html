@@ -35,8 +35,8 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nombre
-                                    <a class="btn" th:href="@{'/empleado/listaAscendente'}"><img src="img/flecha-arriba.png" width="16px"></a>
-                                    <a class="btn" th:href="@{'/empleado/listaDescendente'}"><img src="img/flecha-abajo.png" width="16px"></a>
+                                    <a class="btn" th:href="@{'/empleado/listaAscendente'}"><img th:src="@{/img/flecha-arriba.png}" width="16px"></a>
+                                    <a class="btn" th:href="@{'/empleado/listaDescendente'}"><img th:src="@{/img/flecha-abajo.png}" width="16px"></a>
                             </th>
                             <th scope="col">Apellido</th>
                             <th scope="col">Correo</th>
@@ -51,7 +51,7 @@
                         <td th:text="${empleado.getLastName()}">Apellido</td>
                         <td th:text="${empleado.getEmail()}">correo</td>
                         <td th:text="${empleado.getSalary()}">salario</td>
-                        <td><a class="btn btn-primary" >Editar</a></td>
+                        <td><a th:href="@{'/empleado/info/'+ ${empleado.getId()}}" class="btn btn-primary" >Editar</a></td>
                         <td><a class="btn btn-danger" >Borrar</a></td>
                     </tr>
                 </table>
