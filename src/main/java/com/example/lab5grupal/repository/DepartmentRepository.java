@@ -14,4 +14,7 @@ public interface DepartmentRepository extends JpaRepository<Department,Integer> 
     @Query(nativeQuery = true, value = "select * from departments")
     List<Department> obtenerdepartment();
 
+    @Query(nativeQuery = true, value = "SELECT manager_id FROM hr.departments WHERE (`department_id` = ?1)")
+    Integer Managxdepid(Integer depid);
+
 }

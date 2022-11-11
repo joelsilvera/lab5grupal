@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.swing.text.html.Option;
+import java.time.Instant;
 import java.util.Optional;
 
 @Controller
@@ -61,6 +62,23 @@ public class EmployeesController {
         employeeRepository.actualizarEmp(Employee.getFirstName(), Employee.getLastName(),
                 Employee.getEmail(), Employee.getHiredate(), Employee.getJobid(), Employee.getSalary(), Employee.getDepartmentid(), Employee.getId());
         return "redirect:/empleado/lista";
+    }
+
+    @GetMapping("nuevo")
+    public String newEmployee(Employee Employee, RedirectAttributes attr, Model model){
+        attr.addFlashAttribute("msg", "Usuario creado exitosamente");
+        model.addAttribute("Department",departmentRepository.obtenerdepartment());
+        model.addAttribute("Job",jobRepository.obtenerjobs());
+        return "employee/informationreg";
+    }
+
+    @PostMapping("crear")
+    public String crearEmployee(Employee Employee, Model model){
+        Employee.setEnabled(1);
+        Employee.setManagerid(departmentRepository.Managxdepid(Employee.getDepartmentid()));
+        employeeRepository.save(Employee);
+        return "redirect:/empleado/lista";
+
     }
 
 }
